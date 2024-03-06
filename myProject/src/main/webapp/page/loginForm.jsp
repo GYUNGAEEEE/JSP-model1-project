@@ -5,9 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>LOGIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <style>
+	* {
+		font-family: "Noto Sans KR", sans-serif;
+	}
 	body {
 		background-color: #EBF7FF;
+		margin: 0px;
 	}
 	.mid {
 		display: flex;
@@ -30,12 +37,12 @@
 		margin: 10px;
 		border: none;
 		font-size: 1.2em;
+		border-radius: 7px;
 	}
 	input[type="submit"] {
 		width: 271px;
 		background-color: #F9F3CC;
 		cursor: pointer;
-		border-radius: 7px;
 	}
 	input[type="submit"]:hover {
 	  	background-color: #ffcc99;
@@ -50,7 +57,7 @@
 <body>
 	<div class="mid">
 		<div class="loginForm">
-			<p><b>LOGIN</b></p>
+			<p>로그인</p>
 			<form action="loginCheck.jsp" method="post">
 				<input type="text" name="userID" placeholder="아이디" required="required"/><br/>
 				<input type="password" name="userPWD" placeholder="비밀번호" required="reauired"/><br/>
