@@ -14,35 +14,35 @@
 	userDB.put("user2", "pwd2");
 	userDB.put("user3", "pwd3");
 	userDB.put("user4", "pwd4");
-	if(session.getAttribute("USERID") != null)
-		userDB.put((String)session.getAttribute("USERID"), (String)session.getAttribute("USERPWD"));
 	
+	String userName = request.getParameter("userName");
 	String userID = request.getParameter("userID");
 	String userPWD = request.getParameter("userPWD");
+	String checkPWD = request.getParameter("checkPWD");
 	
 	boolean isError = false;
 	if(userDB.containsKey(userID)) {
-		String DBPWD = userDB.get(userID);
-		if(DBPWD.equals(userPWD)) {
-			session.setAttribute("ISLOGIN", "true");
-			String userName = (String)session.getAttribute("USERNAME");
-			if(userName == null)
-				session.setAttribute("LOGINID", userID);
-			else
-				session.setAttribute("LOGINID", userName);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+		//아이디중복
+		isError = true;
+		request.setAttribute("errMSG", "이미 가입된 아이디입니다.");
+	} else {
+		if(userPWD.equals(checkPWD)) {
+			//가입성공
+			session.setAttribute("USERNAME", userName);
+			session.setAttribute("USERID", userID);
+			session.setAttribute("USERPWD", userPWD);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("joinOk.jsp");
 			dispatcher.forward(request, response);
 		} else {
+			//비번불일치
 			isError = true;
 			request.setAttribute("errMSG", "비밀번호가 일치하지 않습니다.");
 		}
-	} else {
-		isError = true;
-		request.setAttribute("errMSG", "존재하지 않는 ID입니다.");
 	}
 	
 	if(isError) {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("loginForm.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("joinForm.jsp");
 		dispatcher.forward(request, response);
 	}
 %>

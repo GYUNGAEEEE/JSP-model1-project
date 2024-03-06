@@ -39,12 +39,31 @@
 	<div class="mid">
 		<div class="welcome">
 			<h1>Welcome to WOODY!</h1>
-			<form action="loginForm.jsp" method="post">
-				<input type="submit" value="로그인"/>
-			</form>
-			<form action="joinForm.jsp" method="post">
-				<input type="submit" value="회원가입"/>
-			</form>
+<%
+			String isLogin = (String)session.getAttribute("ISLOGIN");
+			if(isLogin != null && isLogin.equals("true")) {
+%>
+				<form action="logout.jsp" method="post">
+					<input type="submit" value="로그아웃"/>
+				</form>
+				<form action="close.jsp" method="post">
+					<input type="submit" value="종료"/>
+				</form>
+<%
+			} else {
+%>
+				<form action="loginForm.jsp" method="post">
+					<input type="submit" value="로그인"/>
+				</form>
+				<form action="joinForm.jsp" method="post">
+					<input type="submit" value="회원가입"/>
+				</form>
+				<form action="close.jsp" method="post">
+					<input type="submit" value="종료"/>
+				</form>
+<%
+			}
+%>
 		</div>
 	</div>
 </body>
