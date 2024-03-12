@@ -25,6 +25,10 @@
   <servlet>
   	<servlet-name>frontController</servlet-name>
   	<servlet-class>exammvc.controller.FrontController</servlet-class>
+  	<init-param>
+  		<param-name>handlerProperties</param-name>
+  		<param-value>/WEB-INF/handler.properties</param-value>
+  	</init-param>
   </servlet>
   
   <servlet-mapping>

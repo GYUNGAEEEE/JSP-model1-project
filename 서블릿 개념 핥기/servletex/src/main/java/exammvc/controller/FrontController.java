@@ -1,8 +1,11 @@
 package exammvc.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +18,48 @@ public class FrontController extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		commandHandlerMap.put("/add", new AddHandler());
-		commandHandlerMap.put("/min", new MinHandler());
+		//commandHandlerMap.put("/add", new AddHandler());
+		//commandHandlerMap.put("/min", new MinHandler());
+		
+		//초기화 파라미터를 이용하여 Properties 불러오기
+		String contextConfigFile = this.getInitParameter("handlerProperties");
+		System.out.println("contextConfigFile: " + contextConfigFile);
+		Properties properties = new Properties();
+		FileInputStream fis = null;
+		try {
+			String contextConfigFilePath = this.getServletContext().getRealPath(contextConfigFile);
+			System.out.println("contextConfigFilePath: " + contextConfigFilePath);
+			fis = new FileInputStream(contextConfigFilePath);
+			properties.load(fis);
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		//핸들러 객체 생성 및 Map에 등록
+		Iterator<Object> propIt = properties.keySet().iterator();
+		while(propIt.hasNext()) {
+			String command = (String)propIt.next();
+			String handlerClassName = properties.getProperty(command);
+			System.out.println(command + ":" + handlerClassName);
+			try {
+				Class<?> handlerClass = Class.forName(handlerClassName);
+				commandHandlerMap.put(command, (CommandHandler)handlerClass.newInstance());
+			} catch(ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch(IllegalAccessException e) {
+				e.printStackTrace(); 
+			} catch(InstantiationException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
