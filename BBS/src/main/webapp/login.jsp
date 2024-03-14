@@ -41,6 +41,8 @@
 					<ul class="dropdown-menu">
 						<li class="active"><a href="login.jsp">로그인</a></li>
 						<li><a href="join.jsp">회원가입</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -60,6 +62,7 @@
 				</form>
 			</div>
 		</div>
+		<div class="col-lg-4"></div>
 	</div>
 	<!-- 부트스트랩 참조 영역 -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
