@@ -13,6 +13,7 @@
 </head>
 <body>
 	<%
+		//메인 페이지로 이동했을 때 세션에 값이 담겨있는지 체크
 		String userID = null;
 		if(session.getAttribute("userID") != null) {
 			userID = (String)session.getAttribute("userID");
@@ -39,6 +40,7 @@
 				<li><a href="bbs.jsp">게시판</a></li>
 			</ul>
 			<%
+				//로그인 하지 않았을 때 보여지는 화면
 				if(userID == null) {
 			%>
 			<!-- 헤더 우측에 나타나는 드랍다운 영역 -->
@@ -55,8 +57,10 @@
 				</li>
 			</ul>
 			<%
+				//로그인이 되어 있는 상태에서 보여주는 화면
 				} else {
 			%>
+			<!-- 헤더 우측에 나타나는 드랍다운 영역 -->
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"

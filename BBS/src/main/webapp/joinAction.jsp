@@ -17,10 +17,12 @@
 </head>
 <body>
 	<%
+		//현재 세션 상태를 체크한다
 		String userID = null;
 		if(session.getAttribute("userID") != null) {
 			userID = (String)session.getAttribute("userID");
 		}
+		//이미 로그인했으면 회원가입을 할 수 없게 한다
 		if(userID != null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

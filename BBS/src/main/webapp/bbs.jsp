@@ -13,6 +13,7 @@
 </head>
 <body>
 	<%
+		//메인 페이지로 이동했을 때 세션에 값이 담겨있는지 체크
 		String userID = null;
 		if(session.getAttribute("userID") != null) {
 			userID = (String)session.getAttribute("userID");
@@ -39,6 +40,7 @@
 				<li class="active"><a href="bbs.jsp">게시판</a></li>
 			</ul>
 			<%
+				//로그인 하지 않았을 때 보여지는 화면
 				if(userID == null) {
 			%>
 			<!-- 헤더 우측에 나타나는 드랍다운 영역 -->
@@ -55,8 +57,10 @@
 				</li>
 			</ul>
 			<%
+				//로그인이 되어 있는 상태에서 보여주는 화면
 				} else {
 			%>
+			<!-- 헤더 우측에 나타나는 드랍다운 영역 -->
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"
@@ -73,6 +77,9 @@
 			%>
 		</div>
 	</nav>
+	<!-- 네비게이션 영역 끝 -->
+	
+	<!-- 게시판 메인 페이지 영역 시작 -->
 	<div class="container">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
@@ -86,6 +93,7 @@
 				</thead>
 				<tbody>
 					<tr>
+						<!-- 테스트 코드 -->
 						<td>1</td>
 						<td>안녕하세요.</td>
 						<td>홍길동</td>
@@ -93,9 +101,12 @@
 					</tr>
 				</tbody>
 			</table>
+			<!-- 글쓰기 버튼 생성 -->
 			<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
+	<!-- 게시판 메인 페이지 영역 끝 -->
+	
 	<!-- 부트스트랩 참조 영역 -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
